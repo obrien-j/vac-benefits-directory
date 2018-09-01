@@ -5,3 +5,5 @@ steps:
   - name: node:10.8.0
     entrypoint: yarn
     args: ["jest"]
+options:
+  machineType: "N1_HIGHCPU_8"
