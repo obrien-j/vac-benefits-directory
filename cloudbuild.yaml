@@ -5,5 +5,8 @@ steps:
   - name: node:10.8.0
     entrypoint: yarn
     args: ["jest"]
+  - name: node:10.8.0
+    entrypoint: yarn
+    args: ["lint"]
 options:
-  machineType: "N1_HIGHCPU_32"
+  machineType: "N1_HIGHCPU_8"
