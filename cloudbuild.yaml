@@ -4,4 +4,4 @@ steps:
     args: ["install"]
   - name: node:10.8.0
     entrypoint: yarn
-    args: ["test"]
+    args: ["jest"]
