@@ -4,7 +4,7 @@ steps:
     args: ["install"]
   - name: node:10.8.0
     entrypoint: yarn
-    args: ["jest"]
+    args: ["jest", "-w", "8"]
   - name: node:10.8.0
     entrypoint: yarn
     args: ["lint"]
