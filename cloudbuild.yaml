@@ -9,18 +9,11 @@ steps:
   #    entrypoint: yarn
   #    args: ["lint"]
   - name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
     args:
       [
-        "build",
-        "-t",
-        "gcr.io/cds-snc/vac:latest",
-        "--build-arg",
-        "AIRTABLE_READ_KEY=$$AIRTABLE_READ_KEY",
-        "--build-arg",
-        "GOOGLE_MAPS_KEY=$$GOOGLE_MAPS_KEY",
-        "--build-arg",
-        "GITHUB_PUBLIC_ACCESS_TOKEN=$$GITHUB_PUBLIC_ACCESS_TOKEN",
-        ".",
+        "-c",
+        "docker build -t --build-arg AIRTABLE_READ_KEY=$$AIRTABLE_READ_KEY --build-arg GOOGLE_MAPS_KEY=$$GOOGLE_MAPS_KEY --build-arg GITHUB_PUBLIC_ACCESS_TOKEN=$$GITHUB_PUBLIC_ACCESS_TOKEN",
       ]
     secretEnv:
       ["AIRTABLE_READ_KEY", "GITHUB_PUBLIC_ACCESS_TOKEN", "GOOGLE_MAPS_KEY"]
