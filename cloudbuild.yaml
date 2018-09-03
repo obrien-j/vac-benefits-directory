@@ -24,8 +24,8 @@ options:
 secrets:
   - kmsKeyName: projects/cds-snc/locations/global/keyRings/cds-keys/cryptoKeys/vac
     secretEnv:
-      AIRTABLE_READ_KEY: CiQADT94XjGY/uCtWuyuBbqng43qHScW7GqBmJV9UPRKqg7GidwSOgAGcDO4Uis7vXYG6/BeqgcFVC2vHpAGGjb+AkG0hI7UI2P3WbEoFjrKYEYsPfUPY02ZiZqGlNjclII=
-      GITHUB_PUBLIC_ACCESS_TOKEN: CiQADT94Xj+8OkeJbDMqvGHSlEvsQjcLDEBIpEgljWeib5hHWAwSQwAGcDO4ACSbnRIiELSoxFOoBkOijue8fvOKrIYpA3A35zydtNKh6yG+s5jazwA5NUIVeX8jzFf6sh6z/ON3SFLtVhM=
-      GOOGLE_MAPS_KEY: CiQADT94XvT8/sQechtyROf0ek7wtS7xojpdisa9TujbrmC7QA8SOAAGcDO4sobCtNJh8KKYINpYXr+zrhFEDSsmKVUDbpzrsRhK15j1JbwnR1I4yen1v/U0Ue4NchwY
+      AIRTABLE_READ_KEY: CiQADT94XiyVGg6MMf7ApdwnxawgfT+t16TfLq9cigVcTCkNmhoSOgAGcDO4M5ZGAkIRzbb0YVcgqt198Bj2hFOLuIcNPe86xOsMxTmedZSjkxp+n/Yo4T4/meOWx7/OulA=
+      GITHUB_PUBLIC_ACCESS_TOKEN: CiQADT94XqB7WyNdJ7z6vBWFbUpR0hlRn/xZIX07ogl15CND/lQSUQAGcDO4rPdSfBsNZ+xTZMqEeE8Xj9ieh1FVYc+KfoVfp9us+2YQWaI5rO62fqNneaMcLNOixtOgYhfKlfd0SlpNHzkp5c6bldyxROv8+0W5ZA==
+      GOOGLE_MAPS_KEY: CiQADT94XuUgykb73Gr/JZLueFh9xq7vcIckHZ/wnlQg5WwgsdgSUAAGcDO4f020FhpFGujfpiHBE8qZ/cRr9fJgNAiw8J5j3xuOP/zUMTTTYtWe7R4Y7DtcarjvWy/8lBbJ009vmOcAbilKHCJXcFiLP5tBJr8S
 
 images: ["gcr.io/cds-snc/vac:latest"]
