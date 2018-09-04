@@ -30,6 +30,16 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     id: push
     args: ["push", "gcr.io/cds-snc/vac:latest"]
+  - name: "gcr.io/cloud-builders/kubectl"
+    id: deploy
+    args:
+      - "set"
+      - "image"
+      - "deployment/vac"
+      - "vac=gcr.io/cds-snc/vac:latest"
+    env:
+      - "CLOUDSDK_COMPUTE_ZONE=us-central1-a"
+      - "CLOUDSDK_CONTAINER_CLUSTER=vac-cluster"
 
 options:
   machineType: "N1_HIGHCPU_8"
