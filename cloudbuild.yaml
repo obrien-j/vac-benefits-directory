@@ -6,7 +6,7 @@ steps:
   - name: node:10.8.0
     id: test
     entrypoint: yarn
-    args: ["jest", "-w", "8"]
+    args: ["jest"]
     waitFor:
       - install
   - name: node:10.8.0
