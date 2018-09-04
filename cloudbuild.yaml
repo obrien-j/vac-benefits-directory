@@ -1,30 +1,35 @@
 steps:
-  - name: node:10.8.0
-    id: install
-    entrypoint: yarn
-    args: ["install"]
-  - name: node:10.8.0
-    id: test
-    entrypoint: yarn
-    args: ["jest", "-w", "8"]
-    waitFor:
-      - install
-  - name: node:10.8.0
-    id: lint
-    entrypoint: yarn
-    args: ["lint"]
-    waitFor:
-      - install
+  #   - name: node:10.8.0
+  #     id: install
+  #     entrypoint: yarn
+  #     args: ["install"]
+  #   - name: node:10.8.0
+  #     id: test
+  #     entrypoint: yarn
+  #     args: ["jest", "-w", "8"]
+  #     waitFor:
+  #       - install
+  #   - name: node:10.8.0
+  #     id: lint
+  #     entrypoint: yarn
+  #     args: ["lint"]
+  #     waitFor:
+  #       - install
   - name: "gcr.io/cloud-builders/docker"
     id: build
     entrypoint: "bash"
     args:
       [
         "-c",
-        "docker build -t gcr.io/cds-snc/vac:latest --build-arg AIRTABLE_READ_KEY=$$AIRTABLE_READ_KEY --build-arg GOOGLE_MAPS_KEY=$$GOOGLE_MAPS_KEY --build-arg GITHUB_PUBLIC_ACCESS_TOKEN=$$GITHUB_PUBLIC_ACCESS_TOKEN .",
+        "docker build -t gcr.io/cds-snc/vac:latest --build-arg CIRCLE_SHA1=$$CIRCLE_SHA1 --build-arg AIRTABLE_READ_KEY=$$AIRTABLE_READ_KEY --build-arg GOOGLE_MAPS_KEY=$$GOOGLE_MAPS_KEY --build-arg GITHUB_PUBLIC_ACCESS_TOKEN=$$GITHUB_PUBLIC_ACCESS_TOKEN .",
       ]
     secretEnv:
       ["AIRTABLE_READ_KEY", "GITHUB_PUBLIC_ACCESS_TOKEN", "GOOGLE_MAPS_KEY"]
+    env:
+      - "CIRCLE_SHA1=$SHORT_SHA"
+  - name: "gcr.io/cloud-builders/docker"
+    id: push
+    args: ["push", "gcr.io/cds-snc/vac:latest"]
 
 options:
   machineType: "N1_HIGHCPU_8"
@@ -35,5 +40,3 @@ secrets:
       AIRTABLE_READ_KEY: CiQADT94XiyVGg6MMf7ApdwnxawgfT+t16TfLq9cigVcTCkNmhoSOgAGcDO4M5ZGAkIRzbb0YVcgqt198Bj2hFOLuIcNPe86xOsMxTmedZSjkxp+n/Yo4T4/meOWx7/OulA=
       GITHUB_PUBLIC_ACCESS_TOKEN: CiQADT94XqB7WyNdJ7z6vBWFbUpR0hlRn/xZIX07ogl15CND/lQSUQAGcDO4rPdSfBsNZ+xTZMqEeE8Xj9ieh1FVYc+KfoVfp9us+2YQWaI5rO62fqNneaMcLNOixtOgYhfKlfd0SlpNHzkp5c6bldyxROv8+0W5ZA==
       GOOGLE_MAPS_KEY: CiQADT94XuUgykb73Gr/JZLueFh9xq7vcIckHZ/wnlQg5WwgsdgSUAAGcDO4f020FhpFGujfpiHBE8qZ/cRr9fJgNAiw8J5j3xuOP/zUMTTTYtWe7R4Y7DtcarjvWy/8lBbJ009vmOcAbilKHCJXcFiLP5tBJr8S
-
-images: ["gcr.io/cds-snc/vac:latest"]
