@@ -1,14 +1,22 @@
 steps:
-  #  - name: node:10.8.0
-  #    entrypoint: yarn
-  #    args: ["install"]
-  #  - name: node:10.8.0
-  #    entrypoint: yarn
-  #    args: ["jest", "-w", "8"]
-  #  - name: node:10.8.0
-  #    entrypoint: yarn
-  #    args: ["lint"]
+  - name: node:10.8.0
+    id: install
+    entrypoint: yarn
+    args: ["install"]
+  - name: node:10.8.0
+    id: test
+    entrypoint: yarn
+    args: ["jest", "-w", "8"]
+    waitFor:
+      - install
+  - name: node:10.8.0
+    id: lint
+    entrypoint: yarn
+    args: ["lint"]
+    waitFor:
+      - install
   - name: "gcr.io/cloud-builders/docker"
+    id: build
     entrypoint: "bash"
     args:
       [
