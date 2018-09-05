@@ -17,7 +17,7 @@ steps:
   - name: "gcr.io/cds-snc/vac:$REVISION_ID"
     id: test
     entrypoint: /bin/sh
-    args: ["-c", "cd /app && yarn test"]
+    args: ["-c", "cd /app && yarn jest"]
     waitFor:
       - push
   - name: "gcr.io/cds-snc/vac:$REVISION_ID"
