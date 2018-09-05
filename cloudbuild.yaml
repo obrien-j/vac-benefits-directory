@@ -14,20 +14,19 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     id: push
     args: ["push", "gcr.io/cds-snc/vac:$REVISION_ID"]
-  - name: gcr.io/cds-snc/vac:$REVISION_ID
+  - name: "gcr.io/cds-snc/vac:$REVISION_ID"
     id: test
     entrypoint: /bin/sh
     args: ["-c", "cd /app && yarn test"]
     waitFor:
       - push
-  - name: gcr.io/cds-snc/vac:$REVISION_ID
+  - name: "gcr.io/cds-snc/vac:$REVISION_ID"
     id: lint
     entrypoint: /bin/sh
     args: ["-c", "cd /app && yarn lint"]
     waitFor:
       - push
-
- - name: "gcr.io/cloud-builders/kubectl"
+  - name: "gcr.io/cloud-builders/kubectl"
     id: deploy
     args:
       - "set"
