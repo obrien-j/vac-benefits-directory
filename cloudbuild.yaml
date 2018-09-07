@@ -26,6 +26,11 @@ steps:
     args: ["-c", "cd /app && yarn lint"]
     waitFor:
       - push
+  - name: "registry.gitlab.com/gitlab-org/security-products/sast:11-3-stable"
+    id: sast
+    args: ["/app/bin/run", "/workspace"]
+    waitFor:
+      - push
   - name: "gcr.io/cloud-builders/kubectl"
     id: deploy
     args:
