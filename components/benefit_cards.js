@@ -122,7 +122,7 @@ export class BenefitCard extends Component {
                       t("current-language-code") === "en"
                         ? benefit.benefitPageEn
                         : benefit.benefitPageFr;
-                    const win = window.open(url, "_blank");
+                    const win = window.open(url, "_self");
                     win.focus();
                   }}
                 >

@@ -39,7 +39,6 @@ export class EmbeddedBenefitCard extends Component {
       <Paper padding="sm" className={root}>
         <HeaderButton
           id={"embedded-" + benefit.id}
-          target="_blank"
           rel="noopener noreferrer"
           className={heading}
           size="small"
