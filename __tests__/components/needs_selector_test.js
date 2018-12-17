@@ -3,6 +3,7 @@ import { mount } from "enzyme";
 import { NeedsSelector } from "../../components/needs_selector";
 import needsFixture from "../fixtures/needs";
 import configureStore from "redux-mock-store";
+import { Provider } from "react-redux";
 
 const { axe, toHaveNoViolations } = require("jest-axe");
 expect.extend(toHaveNoViolations);
@@ -13,13 +14,15 @@ jest.unmock("../../utils/common");
 const common = require.requireActual("../../utils/common");
 
 describe("NeedsSelector", () => {
-  let props;
+  let props, store;
   let _mountedNeedsSelector, mockStore, reduxData;
 
   const mountedNeedsSelector = () => {
     if (!_mountedNeedsSelector) {
       _mountedNeedsSelector = mount(
-        <NeedsSelector {...props} {...reduxData} />
+        <Provider store={store}>
+          <NeedsSelector {...props} {...reduxData} />
+        </Provider>
       );
     }
     return _mountedNeedsSelector;
@@ -40,7 +43,7 @@ describe("NeedsSelector", () => {
     };
     props.reduxState = reduxData;
     mockStore = configureStore();
-    props.store = mockStore(reduxData);
+    store = mockStore(reduxData);
     _mountedNeedsSelector = undefined;
   });
 

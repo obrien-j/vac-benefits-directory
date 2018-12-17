@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import Router from "next/router";
 import React from "react";
 import { Guided } from "../../pages/index";
@@ -12,6 +12,7 @@ import eligibilityPathsFixture from "../fixtures/eligibilityPaths";
 import questionsFixture from "../fixtures/questions";
 import questionDisplayLogicFixture from "../fixtures/question_display_logic";
 import multipleChoiceOptions from "../fixtures/multiple_choice_options";
+import { Provider } from "react-redux";
 
 const { axe, toHaveNoViolations } = require("jest-axe");
 expect.extend(toHaveNoViolations);
@@ -19,7 +20,7 @@ expect.extend(toHaveNoViolations);
 jest.mock("react-ga");
 
 describe("Index", () => {
-  let props;
+  let props, store;
   let _mountedGuided;
   let mockStore, reduxState;
 
@@ -60,12 +61,16 @@ describe("Index", () => {
       questionClearLogic: questionDisplayLogicFixture,
       multipleChoiceOptions: multipleChoiceOptions
     };
-    props.store = mockStore(reduxState);
+    store = mockStore(reduxState);
     props.reduxState = reduxState;
   });
 
   it("passes axe tests", async () => {
-    let html = mountedGuided().html();
+    let html = mount(
+      <Provider store={store}>
+        <Guided {...props} {...reduxState} />
+      </Provider>
+    ).html();
     expect(await axe(html)).toHaveNoViolations();
   });
 
